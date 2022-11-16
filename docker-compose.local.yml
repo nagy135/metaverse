@@ -5,19 +5,13 @@ services:
     volumes:
       - fighter-nest-postgres:/var/lib/postgresql/data
     ports:
-      - "127.0.0.1:3333:5432"
+      - "127.0.0.1:5432:5432"
     command: ["postgres", "-c", "log_statement=all"]
     env_file: ./env/.env.postgres
 
-  # redis:
-  #   image: redis:6.2.6-buster
-  #   volumes:
-  #     - volume_name:/data
-  #   tty: true
-
   app:
     build:
-      dockerfile: ./Dockerfile
+      dockerfile: ./dockerfile.develop
       context: ./app
     volumes:
       - ./app:/usr/src/app
@@ -34,7 +28,6 @@ services:
       - postgres
     ports:
       - "127.0.0.1:13000:3000"
-      - "127.0.0.1:13333:3333"
     volumes:
       - ./api/src:/usr/src/app/src
     env_file:
