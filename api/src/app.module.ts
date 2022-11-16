@@ -13,7 +13,7 @@ import { UserModule } from './user/user.module';
       username: 'metaverse',
       password: 'metaverse',
       database: 'metaverse',
-      entities: [],
+      entities: ["dist/**/*.entity.js"],
       synchronize: true
     }),
     UserModule
