@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:13.1
     volumes:
-      - fighter-nest-postgres:/var/lib/postgresql/data
+      - metaverse-postgres:/var/lib/postgresql/data
     ports:
       - "127.0.0.1:5432:5432"
     command: ["postgres", "-c", "log_statement=all"]
@@ -34,5 +34,5 @@ services:
       - ./env/.env.api
 
 volumes:
-  fighter-nest-postgres:
-    name: fighter-nest-postgres
+  metaverse-postgres:
+    name: metaverse-postgres
