@@ -1,5 +1,6 @@
+import { User } from '@entities/user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
-import { User, UsersService } from './users.service';
+import { UsersService } from './users.service';
 
 describe('UsersService', () => {
   let service: UsersService;
