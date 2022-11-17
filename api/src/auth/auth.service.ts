@@ -1,20 +1,27 @@
-import * as bcrypt from 'bcrypt';
-import { Dependencies, Injectable } from '@nestjs/common';
-import { UserService } from '@user/user.service';
-import { BCRYPT_SALT_ROUNDS } from '@constants/bcrypt';
+import { Injectable } from '@nestjs/common';
+import { UsersService } from '../users/users.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
-@Dependencies(UserService)
 export class AuthService {
-  constructor(private readonly usersService: UserService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
-  async validateUser(nickname: string, password: string) {
-    const user = await this.usersService.findOneByNickname(nickname);
-    const hashedPassword = await bcrypt.hash(password, BCRYPT_SALT_ROUNDS);
-    if (user && user.password === hashedPassword) {
+  async validateUser(username: string, pass: string): Promise<any> {
+    const user = await this.usersService.findOne(username);
+    if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
     }
     return null;
+  }
+
+  async login(user: any) {
+    const payload = { username: user.username, sub: user.userId };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 }

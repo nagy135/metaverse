@@ -20,7 +20,7 @@
     "paths": {
       "@entities/*": ["./src/entities/*"],
       "@constants/*": ["./src/constants/*"],
-      "@user/*": ["./src/user/*"],
+      "@users/*": ["./src/users/*"],
       "@auth/*": ["./src/auth/*"]
     }
   }
