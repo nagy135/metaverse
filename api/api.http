@@ -1,0 +1,18 @@
+POST http://localhost:13000/signup
+Content-Type: application/json
+
+{
+    "username": "viktor",
+    "password": "viktor"
+}
+
+POST http://localhost:13000/login
+Content-Type: application/json
+
+{
+    "username": "viktor",
+    "password": "viktor"
+}
+
+GET http://localhost:13000/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpa3RvciIsInN1YiI6NCwiaWF0IjoxNjY4Njk5OTE4LCJleHAiOjE2Njg2OTk5Nzh9.luzRJNJX0OPGKkhYEb_hsy4Ml1gXtm6llWHG7BAfaNo

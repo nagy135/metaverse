@@ -13,7 +13,7 @@ export class AppController {
 
   ) {}
 
-  @Post('/signup')
+  @Post('signup')
   async signup(
     @Body('username') username: string,
     @Body('password') password: string
@@ -22,7 +22,7 @@ export class AppController {
   }
 
   @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
+  @Post('login')
   async login(@Request() req: any) {
     return this.authService.login(req.user);
   }
