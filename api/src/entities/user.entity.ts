@@ -6,7 +6,7 @@ export class User extends BaseEntity {
   id: number;
 
   @Column({type: 'varchar'})
-  nickname: string;
+  username: string;
 
   @Column({type: 'varchar'})
   password: string // hashed version, simple auth for now
