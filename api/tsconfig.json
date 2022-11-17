@@ -18,7 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@entities/*": ["./src/entities/*"]
+      "@entities/*": ["./src/entities/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@user/*": ["./src/user/*"],
+      "@auth/*": ["./src/auth/*"]
     }
   }
 }
