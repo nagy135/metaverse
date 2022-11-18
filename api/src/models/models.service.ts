@@ -5,20 +5,19 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ModelsService {
+  @InjectRepository(Model) private modelRepository: Repository<Model>;
 
-  @InjectRepository(Model) private modelRepository: Repository<Model>
-
-  async createModel (
-    userId: number,
-    name: string,
-    filename: string,
-  ) {
+  async createModel(userId: number, name: string, filename: string) {
     const model = this.modelRepository.create({
       name,
       userId,
-      filename
-    })
+      filename,
+    });
 
     await model.save();
+  }
+
+  async findOneById(id: number): Promise<Model> {
+    return this.modelRepository.findOneOrFail(id);
   }
 }
