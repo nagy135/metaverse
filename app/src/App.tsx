@@ -1,11 +1,25 @@
 import LoginSwitcher from "@components/login-switcher";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-export const JwtTokenContext = createContext<string | null>(null);
+type TJwtToken = string | null;
+type TJwtTokenContext = {
+  jwtToken: TJwtToken;
+  setJwtToken: (token: TJwtToken) => void;
+};
+const jwtTokenContextDefault: TJwtTokenContext = {
+  jwtToken: null,
+  setJwtToken: (_token: TJwtToken): void => {},
+};
+
+export const JwtTokenContext = createContext<TJwtTokenContext>(
+  jwtTokenContextDefault
+);
 
 function App() {
+  const [jwtToken, setJwtToken] = useState<TJwtToken>(null);
+
   return (
-    <JwtTokenContext.Provider value={null}>
+    <JwtTokenContext.Provider value={{ jwtToken, setJwtToken }}>
       <LoginSwitcher />
     </JwtTokenContext.Provider>
   );
