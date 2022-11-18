@@ -4,27 +4,27 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Model } from './model.entity';
+import { User } from './user.entity';
 
-@Entity({ name: 'users' })
-export class User extends BaseEntity {
+@Entity({ name: 'models' })
+export class Model extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', unique: true })
-  username: string;
+  @Column({ type: 'varchar' })
+  name: string;
 
   @Column({ type: 'varchar' })
-  password: string; // hashed version, simple auth for now
+  filename: string;
 
   // relations {{{
 
-  @OneToMany(() => Model, (model: Model) => model.user)
-  models: Model[];
+  @ManyToOne(() => User, (user: User) => user.models)
+  user: User;
 
   // }}}
 
