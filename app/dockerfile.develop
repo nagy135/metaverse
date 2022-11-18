@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
 COPY yarn.lock /usr/src/app
+COPY craco.config.js /usr/src/app
 
 # Production use node instead of root
 # USER node
@@ -14,13 +15,6 @@ COPY yarn.lock /usr/src/app
 RUN yarn config set ignore-engines true
 
 RUN yarn
-
-RUN yarn global add prisma next
-
-
-# RUN prisma generate
-
-# RUN prisma migrate dev
 
 EXPOSE 3000
 CMD [ "yarn", "start" ]
