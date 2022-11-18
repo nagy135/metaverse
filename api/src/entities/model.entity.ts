@@ -25,6 +25,8 @@ export class Model extends BaseEntity {
 
   @ManyToOne(() => User, (user: User) => user.models)
   user: User;
+  @Column({ type: 'integer' })
+  userId: number;
 
   // }}}
 
