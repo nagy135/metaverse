@@ -18,6 +18,8 @@
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["./components/*"],
+      "@ctypes/*": ["./ctypes/*"],
+      "@api/*": ["./api/*"],
       "@constants/*": ["./constants/*"]
     }
   },

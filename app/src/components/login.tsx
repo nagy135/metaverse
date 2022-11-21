@@ -1,6 +1,8 @@
-import { LOGIN_EP } from "@constants/api";
+import { API_EP } from "@constants/api";
 import { JwtTokenContext } from "App";
 import { useContext, useState } from "react";
+
+export const LOGIN_EP = `${API_EP}/login`;
 
 export default () => {
   const [username, setUsername] = useState<string>("viktor");

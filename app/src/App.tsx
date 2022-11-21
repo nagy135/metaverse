@@ -1,7 +1,9 @@
 import LoginSwitcher from "@components/login-switcher";
+import { TJwtToken } from "@ctypes/jwt";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createContext, useState } from "react";
+import Model from "@components/model";
 
-type TJwtToken = string | null;
 type TJwtTokenContext = {
   jwtToken: TJwtToken;
   setJwtToken: (token: TJwtToken) => void;
@@ -20,7 +22,12 @@ function App() {
 
   return (
     <JwtTokenContext.Provider value={{ jwtToken, setJwtToken }}>
-      <LoginSwitcher />
+      <Router>
+        <Routes>
+          <Route index element={<LoginSwitcher />} />
+          <Route path="models/:id" element={<Model />} />
+        </Routes>
+      </Router>
     </JwtTokenContext.Provider>
   );
 }
