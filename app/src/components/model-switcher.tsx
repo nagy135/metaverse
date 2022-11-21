@@ -13,14 +13,16 @@ export default () => {
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Model</h1>
-      {models.map((e) => {
-        return (
-          <div>
-            <a href="">{e.name}</a>
-          </div>
-        );
-      })}
+      <h1 className="text-3xl font-bold m-5 text-center">Models belonging to YOU:</h1>
+      <div className="container mx-auto flex flex-col justify-center">
+        {models.map((e, i) => {
+          return (
+            <a key={`model_${i}`} className="btn m-1" href={`/models/${e.id}`}>
+              {e.name}
+            </a>
+          );
+        })}
+      </div>
     </>
   );
 };
