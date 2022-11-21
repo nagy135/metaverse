@@ -19,6 +19,7 @@ import { Express } from 'express';
 import { ModelsService } from './models.service';
 import { Model } from '@entities/model.entity';
 import { join } from 'path';
+import { RequestWithJwtUser } from 'src/types/common';
 
 @Controller('models')
 export class ModelsController {
@@ -26,8 +27,8 @@ export class ModelsController {
 
   @Get('')
   @UseGuards(JwtAuthGuard)
-  async getModels(@Req() req: any): Promise<Model[]> {
-    return this.modelsService.findAllByUserId(req.user.id as number);
+  async getModels(@Req() req: RequestWithJwtUser): Promise<Model[]> {
+    return this.modelsService.findAllByUserId(req.user.id);
   }
 
   @Get(':id')
@@ -57,12 +58,12 @@ export class ModelsController {
     // }),
     Express.Multer.File,
     @Body('name') name: string,
-    @Req() req: any,
+    @Req() req: RequestWithJwtUser,
   ) {
     const newFileName = `${req.user.id}__${file.originalname}`;
     fs.renameSync(`${file.path}`, `${file.destination}/${newFileName}`);
     return this.modelsService.createModel(
-      req.user.id as number,
+      req.user.id,
       name,
       newFileName,
     );
