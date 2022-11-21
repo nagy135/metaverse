@@ -2,7 +2,7 @@
 
 curl \
     -X POST \
-    -F name=awesome_model \
+    -F name=real_model \
     -F file=@test.stl \
     -H "Authorization: Bearer $1" \
     http://localhost:13000/models

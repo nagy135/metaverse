@@ -9,6 +9,7 @@ import {
   // ParseFilePipe,
   Post,
   Req,
+  Res,
   StreamableFile,
   UploadedFile,
   UseGuards,
@@ -20,6 +21,7 @@ import { ModelsService } from './models.service';
 import { Model } from '@entities/model.entity';
 import { join } from 'path';
 import { RequestWithJwtUser } from 'src/types/common';
+import type { Response } from 'express';
 
 @Controller('models')
 export class ModelsController {
@@ -37,8 +39,15 @@ export class ModelsController {
   }
 
   @Get('file/:id')
-  async getFile(@Param('id') id: number): Promise<StreamableFile> {
+  async getFile(
+    @Param('id') id: number,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<StreamableFile> {
     const model = await this.modelsService.findOneById(id);
+    res.set({
+      ['Content-Type']: 'model/stl',
+      ['Content-Disposition']: `attachment; filename="${model.filename}"`,
+    });
     return new StreamableFile(
       fs.createReadStream(join(process.cwd(), `upload/${model.filename}`)),
     );
@@ -62,10 +71,6 @@ export class ModelsController {
   ) {
     const newFileName = `${req.user.id}__${file.originalname}`;
     fs.renameSync(`${file.path}`, `${file.destination}/${newFileName}`);
-    return this.modelsService.createModel(
-      req.user.id,
-      name,
-      newFileName,
-    );
+    return this.modelsService.createModel(req.user.id, name, newFileName);
   }
 }
