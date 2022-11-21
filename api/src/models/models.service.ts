@@ -20,4 +20,8 @@ export class ModelsService {
   async findOneById(id: number): Promise<Model> {
     return this.modelRepository.findOneOrFail(id);
   }
+
+  async findAllByUserId(userId: number): Promise<Model[]> {
+    return this.modelRepository.find({ where: { userId } });
+  }
 }

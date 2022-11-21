@@ -24,6 +24,12 @@ import { join } from 'path';
 export class ModelsController {
   constructor(private readonly modelsService: ModelsService) {}
 
+  @Get('')
+  @UseGuards(JwtAuthGuard)
+  async getModels(@Req() req: any): Promise<Model[]> {
+    return this.modelsService.findAllByUserId(req.user.id as number);
+  }
+
   @Get(':id')
   async getModel(@Param('id') id: number): Promise<Model> {
     return this.modelsService.findOneById(id);
