@@ -9,7 +9,6 @@ interface IProps {
 
 export default ({ modelId }: IProps) => {
   const geom = useLoader(STLLoader, `${API_EP}/models/file/${modelId}`);
-  console.log("================\n", "geom: ", geom, "\n================");
   const ref = useRef<any>();
 
   const { camera } = useThree();
