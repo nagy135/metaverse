@@ -1,20 +1,43 @@
+import { LOGIN_EP } from "@constants/api";
 import { JwtTokenContext } from "App";
 import { useContext, useState } from "react";
 
 export default () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [username, setUsername] = useState<string>("viktor");
+  const [password, setPassword] = useState<string>("viktor");
 
-  const {setJwtToken} = useContext(JwtTokenContext);
+  const { setJwtToken } = useContext(JwtTokenContext);
 
   const handleLogin = () => {
-  console.log("================\n", "username: ", username, "\n================");
-  console.log("================\n", "password: ", password, "\n================");
-  }
-  
-  return (<div>
-    <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-    <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
-    <button onClick={handleLogin}>LOGIN</button>
-  </div>);
+    fetch(LOGIN_EP, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    })
+      .then((e) => e.json())
+      .then((e) => setJwtToken(e.access_token));
+  };
+
+  return (
+    <div className="container mx-auto flex flex-col items-center mt-5">
+      <input
+        type="text"
+        value={username}
+        className="input input-bordered w-full max-w-xs mb-3"
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="text"
+        value={password}
+        className="input input-bordered w-full max-w-xs mb-3"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button className="btn" onClick={handleLogin}>LOGIN</button>
+    </div>
+  );
 };
