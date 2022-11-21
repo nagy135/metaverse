@@ -19,7 +19,7 @@ export default () => {
       <h1 className="text-3xl mb-5">
         Model: <strong>{model.name}</strong>(#{model.id}, {model.filename})
       </h1>
-      <Canvas camera={{ position: [0,0,0]}}>
+      <Canvas linear flat camera={{ position: [0,-50,20]}}>
         <Suspense fallback={null}>
           <ThreeModel modelId={model.id} />
         </Suspense>
