@@ -1,5 +1,5 @@
 import { Model } from '@entities/model.entity';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -18,7 +18,11 @@ export class ModelsService {
   }
 
   async findOneById(id: number): Promise<Model> {
-    return this.modelRepository.findOneOrFail(id);
+    const model = await this.modelRepository.findOne(id)
+    if (model)
+      return model;
+    else
+      throw new HttpException('Entity not found', HttpStatus.NOT_FOUND);
   }
 
   async findAllByUserId(userId: number): Promise<Model[]> {
