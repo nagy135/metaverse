@@ -23,8 +23,7 @@ export default ({ modelId }: IProps) => {
         <primitive object={geom} attach="geometry" />
         <meshStandardMaterial color={"orange"} />
       </mesh>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      <pointLight position={[0, 0, 20]} />
     </>
   );
 };
