@@ -25,11 +25,16 @@ export default () => {
         Models belonging to YOU:
       </h1>
       <div className="container mx-auto flex flex-col justify-center">
+      <Link to="/create-model" className="btn btn-warning m-2 mx-auto">Add More</Link>
         <div className="mx-auto">
           {models.map((e, i) => {
             return (
               <div key={`model_div_${i}`} className="flex justify-end m-1">
-                <Link key={`model_link_${i}`} className="btn" to={`/models/${e.id}`}>
+                <Link
+                  key={`model_link_${i}`}
+                  className="btn"
+                  to={`/models/${e.id}`}
+                >
                   {e.name}
                 </Link>
                 <button

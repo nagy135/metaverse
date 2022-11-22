@@ -19,7 +19,7 @@ export const JwtTokenContext = createContext<TJwtTokenContext>(
   jwtTokenContextDefault
 );
 
-const DEBUG_LOGIN = true;
+const DEBUG_LOGIN = false;
 function App() {
   const [jwtToken, setJwtToken] = useState<TJwtToken>(
     DEBUG_LOGIN

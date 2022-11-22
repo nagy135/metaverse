@@ -10,8 +10,8 @@ interface IProps {
 export default ({ modelId }: IProps) => {
   const geom = useLoader(STLLoader, `${API_EP}/models/file/${modelId}`);
   const ref = useRef<any>();
+  const { size, viewport, camera } = useThree();
 
-  const { camera } = useThree();
   useEffect(() => {
     // @ts-ignore
     camera.lookAt(ref.current.position);
@@ -19,10 +19,13 @@ export default ({ modelId }: IProps) => {
 
   return (
     <>
-      <mesh ref={ref}>
+      <mesh
+        ref={ref}
+      >
         <primitive object={geom} attach="geometry" />
         <meshStandardMaterial color={"orange"} />
       </mesh>
+      <ambientLight intensity={0.3} />
       <pointLight position={[0, 0, 20]} />
     </>
   );

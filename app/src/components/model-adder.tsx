@@ -1,6 +1,7 @@
 import createModel from "@api/create-model";
 import { JwtTokenContext } from "App";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default () => {
   const { jwtToken } = useContext(JwtTokenContext);
@@ -26,6 +27,7 @@ export default () => {
   return (
     <>
       <div className="container mx-auto flex flex-col items-center mt-5">
+      <Link to="/" className="btn btn-error m-2 mx-auto">Back</Link>
         <input
           type="text"
           value={name}
