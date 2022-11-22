@@ -2,7 +2,7 @@ import getModel from "@api/get-model";
 import { TModel } from "@ctypes/entities";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ThreeModel from "./three/model";
 import ThreeOrbitControls from "./three/orbitalcontrol";
 
@@ -23,9 +23,7 @@ export default () => {
         marginTop: "5vh",
       }}
     >
-      <button onClick={() => {}} className="btn">
-        Back
-      </button>
+      <Link className="btn" to="/">Back</Link>
       <h1 className="text-3xl mb-5">
         Model: <strong>{model.name}</strong>(#{model.id}, {model.filename})
       </h1>

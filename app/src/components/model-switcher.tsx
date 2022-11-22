@@ -3,6 +3,7 @@ import getModels from "@api/get-models";
 import { TModel } from "@ctypes/entities";
 import { JwtTokenContext } from "App";
 import { useCallback, useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default () => {
   const { jwtToken } = useContext(JwtTokenContext);
@@ -27,11 +28,12 @@ export default () => {
         <div className="mx-auto">
           {models.map((e, i) => {
             return (
-              <div className="flex justify-end m-1">
-                <a key={`model_${i}`} className="btn" href={`/models/${e.id}`}>
+              <div key={`model_div_${i}`} className="flex justify-end m-1">
+                <Link key={`model_link_${i}`} className="btn" to={`/models/${e.id}`}>
                   {e.name}
-                </a>
+                </Link>
                 <button
+                  key={`delete_model_${i}`}
                   onClick={() => handleDelete(e.id)}
                   className="btn btn-error ml-2"
                 >
