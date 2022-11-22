@@ -1,3 +1,4 @@
+import loginSignup from "@api/login-signup";
 import { API_EP } from "@constants/api";
 import { JwtTokenContext } from "App";
 import { useContext, useState } from "react";
@@ -10,19 +11,10 @@ export default () => {
 
   const { setJwtToken } = useContext(JwtTokenContext);
 
-  const handleLogin = () => {
-    fetch(LOGIN_EP, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    })
-      .then((e) => e.json())
-      .then((e) => setJwtToken(e.access_token));
+  const handleLogin = (logSig: 'login' | 'signup') => {
+    loginSignup(logSig, { username, password }).then((e: string) =>
+      setJwtToken(e)
+    );
   };
 
   return (
@@ -39,7 +31,12 @@ export default () => {
         className="input input-bordered w-full max-w-xs mb-3"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="btn" onClick={handleLogin}>LOGIN</button>
+      <button className="btn" onClick={() => handleLogin('login')}>
+        LOGIN
+      </button>
+      <button className="btn" onClick={() => handleLogin('signup')}>
+        SIGN UP
+      </button>
     </div>
   );
 };
