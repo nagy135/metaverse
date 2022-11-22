@@ -69,8 +69,10 @@ export class ModelsController {
     @Body('name') name: string,
     @Req() req: RequestWithJwtUser,
   ) {
-    const newFileName = `${req.user.id}__${file.originalname}`;
-    fs.renameSync(`${file.path}`, `${file.destination}/${newFileName}`);
+    const stamp = new Date().getTime();
+    const newFileName = `${req.user.id}_${stamp}_${file.originalname}`;
+    const newPath = `${file.destination}/${newFileName}`;
+    fs.renameSync(`${file.path}`, newPath);
     return this.modelsService.createModel(req.user.id, name, newFileName);
   }
 }
