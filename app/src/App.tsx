@@ -3,6 +3,8 @@ import { TJwtToken } from "@ctypes/jwt";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createContext, useState } from "react";
 import Model from "@components/model";
+import ModelSwitcher from "@components/model-switcher";
+import ModelAdder from "@components/model-adder";
 
 type TJwtTokenContext = {
   jwtToken: TJwtToken;
@@ -29,8 +31,22 @@ function App() {
     <JwtTokenContext.Provider value={{ jwtToken, setJwtToken }}>
       <Router>
         <Routes>
-          <Route index element={<LoginSwitcher />} />
+          <Route
+            index
+            element={
+              <LoginSwitcher>
+                <ModelSwitcher />
+              </LoginSwitcher>
+            }
+          />
           <Route path="models/:id" element={<Model />} />
+          <Route path="create-model" 
+            element={
+              <LoginSwitcher>
+                <ModelAdder />
+              </LoginSwitcher>
+            }
+            />
         </Routes>
       </Router>
     </JwtTokenContext.Provider>

@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import { JwtTokenContext } from "../App";
 import Login from "./login";
-import ModelSwitcher from "./model-switcher";
 
-export default () => {
+interface IProps {
+  children: JSX.Element;
+}
+
+export default ({ children }: IProps) => {
   const { jwtToken } = useContext(JwtTokenContext);
-  return jwtToken ? <ModelSwitcher /> : <Login />;
+  return jwtToken ? children : <Login />;
 };
