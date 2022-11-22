@@ -25,7 +25,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpa
 GET http://localhost:13000/models
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpa3RvciIsInN1YiI6MSwiaWF0IjoxNjY4NzYyNTQyLCJleHAiOjE2Njg3NjI2MDJ9.uUS80kLr1lNO6MbFqlLxZAzuxeli00bpad-7iG7zaMQ
 
-GET http://localhost:13000/models/2
+GET http://localhost:13000/models/1
+
+DELETE http://localhost:13000/models/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpa3RvciIsInN1YiI6MSwiaWF0IjoxNjY4NzYyNTQyLCJleHAiOjE2Njg3NjI2MDJ9.uUS80kLr1lNO6MbFqlLxZAzuxeli00bpad-7iG7zaMQ
 
 GET http://localhost:13000/models/file/2
 

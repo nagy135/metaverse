@@ -3,6 +3,7 @@ import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   // FileTypeValidator,
@@ -36,6 +37,12 @@ export class ModelsController {
   @Get(':id')
   async getModel(@Param('id') id: number): Promise<Model> {
     return this.modelsService.findOneById(id);
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  async deleteModel(@Param('id') id: number, @Req() req: RequestWithJwtUser) {
+    return this.modelsService.deleteOneById(id, req.user.id);
   }
 
   @Get('file/:id')

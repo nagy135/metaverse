@@ -18,14 +18,22 @@ export class ModelsService {
   }
 
   async findOneById(id: number): Promise<Model> {
-    const model = await this.modelRepository.findOne(id)
-    if (model)
-      return model;
-    else
-      throw new HttpException('Entity not found', HttpStatus.NOT_FOUND);
+    const model = await this.modelRepository.findOne(id);
+    if (model) return model;
+    else throw new HttpException('Entity not found', HttpStatus.NOT_FOUND);
   }
 
   async findAllByUserId(userId: number): Promise<Model[]> {
     return this.modelRepository.find({ where: { userId } });
+  }
+  async deleteOneById(id: number, userId: number): Promise<Model> {
+    const model = await this.modelRepository.findOne(id);
+    if (!model)
+      throw new HttpException('Entity not found (or does not belong to this user)', HttpStatus.NOT_FOUND);
+
+    if (model.userId !== userId)
+      throw new HttpException('Entity does not belong to this user', HttpStatus.FORBIDDEN);
+
+    return this.modelRepository.remove(model);
   }
 }
