@@ -10,6 +10,7 @@
     "^@/(.*)$": "<rootDir>/../src/$1",
     "^@entities/(.*)$": "<rootDir>/../src/entities/$1",
     "^@constants/(.*)$": "<rootDir>/../src/constants/$1",
+    "^@pipes/(.*)$": "<rootDir>/../src/pipes/$1",
     "^@users/(.*)$": "<rootDir>/../src/users/$1",
     "^@auth/(.*)$": "<rootDir>/../src/auth/$1"
   }
