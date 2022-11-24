@@ -11,32 +11,37 @@ export default () => {
 
   const { setJwtToken } = useContext(JwtTokenContext);
 
-  const handleLogin = (logSig: 'login' | 'signup') => {
+  const handleLogin = (logSig: "login" | "signup") => {
     loginSignup(logSig, { username, password }).then((e: string) =>
       setJwtToken(e)
     );
   };
 
   return (
-    <div className="container mx-auto flex flex-col items-center mt-5">
+    <div className="container h-screen  mx-auto flex flex-col max-w-xs items-center mt-5 justify-center">
       <input
         type="text"
         value={username}
-        className="input input-bordered w-full max-w-xs mb-3"
+        className="input input-bordered w-full mb-3"
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
         type="text"
         value={password}
-        className="input input-bordered w-full max-w-xs mb-3"
+        className="input input-bordered w-full mb-3"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="btn" onClick={() => handleLogin('login')}>
-        LOGIN
-      </button>
-      <button className="btn" onClick={() => handleLogin('signup')}>
-        SIGN UP
-      </button>
+      <div className="flex justify-between w-full gap-x-2">
+        <button
+          className="btn btn-primary flex-1"
+          onClick={() => handleLogin("login")}
+        >
+          LOGIN
+        </button>
+        <button className="btn" onClick={() => handleLogin("signup")}>
+          SIGN UP
+        </button>
+      </div>
     </div>
   );
 };
