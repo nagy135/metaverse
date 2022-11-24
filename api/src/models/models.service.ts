@@ -23,6 +23,10 @@ export class ModelsService {
     else throw new HttpException('Entity not found', HttpStatus.NOT_FOUND);
   }
 
+  async findAll(): Promise<Model[]> {
+    return this.modelRepository.find();
+  }
+
   async findAllByUserId(userId: number): Promise<Model[]> {
     return this.modelRepository.find({ where: { userId } });
   }

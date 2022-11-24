@@ -34,6 +34,11 @@ export class ModelsController {
     return this.modelsService.findAllByUserId(req.user.id);
   }
 
+  @Get('all')
+  async getAllModels(): Promise<Model[]> {
+    return this.modelsService.findAll();
+  }
+
   @Get(':id')
   async getModel(@Param('id') id: number): Promise<Model> {
     return this.modelsService.findOneById(id);
