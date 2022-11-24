@@ -20,12 +20,19 @@ export default () => {
   }, []);
 
   return (
-    <>
+    <div className="container mx-auto max-w-sm">
       <h1 className="text-3xl font-bold m-5 text-center">
-        Models belonging to YOU:
+        Your models
       </h1>
       <div className="container mx-auto flex flex-col justify-center">
-      <Link to="/create-model" className="btn btn-warning m-2 mx-auto">Add More</Link>
+        <div className="flex justify-around">
+          <Link to="/create-model" className="btn btn-warning m-2 mx-auto">
+            Add More
+          </Link>
+          <Link to="/models" className="btn btn-info m-2 mx-auto">
+            Show all
+          </Link>
+        </div>
         <div className="mx-auto">
           {models.map((e, i) => {
             return (
@@ -49,6 +56,6 @@ export default () => {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
