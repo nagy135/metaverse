@@ -19,14 +19,13 @@ export default ({ modelId }: IProps) => {
 
   return (
     <>
-      <mesh
-        ref={ref}
-      >
+      <mesh ref={ref}>
         <primitive object={geom} attach="geometry" />
         <meshStandardMaterial color={"orange"} />
       </mesh>
       <ambientLight intensity={0.3} />
-      <pointLight position={[0, 0, 20]} />
+      <pointLight position={[-50, 20, 0]} />
+      <pointLight position={[50, 20, 0]} />
     </>
   );
 };

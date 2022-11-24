@@ -1,9 +1,11 @@
 import getModel from "@api/get-model";
 import { API_EP } from "@constants/api";
+import { CAMERA_POSITION } from "@constants/three";
 import { TModel } from "@ctypes/entities";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, Vector3 } from "@react-three/fiber";
 import { Suspense, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { AxesHelper } from "three/src/helpers/AxesHelper";
 import ThreeModel from "./three/model";
 import ThreeOrbitControls from "./three/orbitalcontrol";
 
@@ -29,7 +31,8 @@ export default () => {
       <h3 className="mb-5">
         {model.filename}
       </h3>
-      <Canvas className="flex-1" linear flat camera={{ position: [0, -50, 20] }}>
+      <Canvas className="flex-1" linear flat camera={{ position: CAMERA_POSITION as Vector3 }}>
+        <primitive object={new AxesHelper(10)} />
         <Suspense fallback={null}>
           <ThreeModel modelId={model.id} />
         </Suspense>

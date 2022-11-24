@@ -9,8 +9,8 @@ export default () => {
     () => {
       const controls = new OrbitControls(camera, gl.domElement);
 
-      controls.minDistance = 2;
-      controls.maxDistance = 100;
+      controls.minDistance = 1;
+      controls.maxDistance = 1000;
       return () => {
         controls.dispose();
       };
