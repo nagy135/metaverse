@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { JwtTokenContext } from "../App";
 import Login from "./login";
 
@@ -12,12 +12,14 @@ export default ({ children }: IProps) => {
   let { jwtToken, setJwtToken } = useContext(JwtTokenContext);
 
   // NOTE: try getting it from localStorage if present
-  if (jwtToken) {
-    localStorage.setItem(JWT_TOKEN_KEY, jwtToken);
-  } else {
-    const localJwtToken = localStorage.getItem(JWT_TOKEN_KEY);
-    if (localJwtToken) setJwtToken(localJwtToken);
-  }
+  useEffect(() => {
+    if (jwtToken) {
+      localStorage.setItem(JWT_TOKEN_KEY, jwtToken);
+    } else {
+      const localJwtToken = localStorage.getItem(JWT_TOKEN_KEY);
+      if (localJwtToken) setJwtToken(localJwtToken);
+    }
+  }, []);
 
   const handleLogOut = useCallback(() => {
     setJwtToken(null);

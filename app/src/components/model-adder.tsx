@@ -1,18 +1,19 @@
 import createModel from "@api/create-model";
 import { JwtTokenContext } from "App";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default () => {
   const { jwtToken } = useContext(JwtTokenContext);
   const [name, setName] = useState("");
   const fileRef = useRef<File | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // getModels(jwtToken).then((e) => setModels(e));
   }, []);
 
-  const handleUpload = useCallback(() => {
+  const handleUpload = useCallback(async () => {
     if (!fileRef.current) {
       alert("No file to upload !!!");
       return;
@@ -21,13 +22,21 @@ export default () => {
     formData.append("name", name);
     formData.append("file", fileRef.current);
 
-    createModel(jwtToken, formData).then(() => alert("added"));
+    try {
+      await createModel(jwtToken, formData);
+      alert("added");
+      navigate('/');
+    } catch (err) {
+      alert("failed to add");
+    }
   }, [name]);
 
   return (
     <>
       <div className="container mx-auto flex flex-col items-center mt-5">
-      <Link to="/" className="btn btn-error m-2 mx-auto">Back</Link>
+        <Link to="/" className="btn btn-error m-2 mx-auto">
+          Back
+        </Link>
         <input
           type="text"
           value={name}

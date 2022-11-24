@@ -18,7 +18,7 @@ export default () => {
   };
 
   return (
-    <div className="container h-screen  mx-auto flex flex-col max-w-xs items-center mt-5 justify-center">
+    <div className="container h-screen mx-auto flex flex-col max-w-xs items-center mt-5 justify-center">
       <input
         type="text"
         value={username}
