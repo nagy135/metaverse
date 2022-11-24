@@ -5,6 +5,7 @@ import { createContext, useState } from "react";
 import Model from "@components/model";
 import ModelSwitcher from "@components/model-switcher";
 import ModelAdder from "@components/model-adder";
+import AllModelsSwitcher from "@components/all-models-switcher";
 
 type TJwtTokenContext = {
   jwtToken: TJwtToken;
@@ -39,6 +40,7 @@ function App() {
               </LoginSwitcher>
             }
           />
+          <Route path="models" element={<AllModelsSwitcher />} />
           <Route path="models/:id" element={<Model />} />
           <Route path="create-model" 
             element={

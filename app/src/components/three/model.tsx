@@ -10,7 +10,7 @@ interface IProps {
 export default ({ modelId }: IProps) => {
   const geom = useLoader(STLLoader, `${API_EP}/models/file/${modelId}`);
   const ref = useRef<any>();
-  const { size, viewport, camera } = useThree();
+  const { camera } = useThree();
 
   useEffect(() => {
     // @ts-ignore

@@ -11,17 +11,22 @@ type TLoginSignupData = {
 export default async (
   loginSignup: "login" | "signup",
   { username, password }: TLoginSignupData
-): Promise<string> => {
-  return (
-    await fetch(loginSignup === "login" ? LOGIN_EP : SIGNUP_EP, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    }).then((e) => e.json())
-  ).access_token;
+): Promise<string | null> => {
+  const response = await fetch(loginSignup === "login" ? LOGIN_EP : SIGNUP_EP, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+
+  if (!response.ok) throw new Error("cant signup");
+
+  if (loginSignup === "login") {
+    return (await response.json()).access_token;
+  }
+  return null;
 };
