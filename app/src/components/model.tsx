@@ -58,10 +58,10 @@ export default () => {
       </Canvas>
       <div className="flex justify-between">
         <button className={`btn ${rotate === -1 ? 'btn-error' : ''}`} onClick={() => handleRotate(-1)}>
-          Left
+          Roll Left
         </button>
         <button className={`btn ${rotate === 1 ? 'btn-error' : ''}`} onClick={() => handleRotate(1)}>
-          Right
+          Roll Right
         </button>
       </div>
     </div>
