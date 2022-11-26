@@ -13,7 +13,8 @@ export default () => {
   const [model, setModel] = useState<TModel | null>(null);
   const { id } = useParams();
   const rotateRef = useRef<number | null>(null);
-  const [rotate, setRotate] = useState<number | null>(null);
+  const rollLeftRef = useRef<HTMLButtonElement>(null);
+  const rollRightRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (id) getModel(Number(id)).then((e) => setModel(e));
@@ -22,7 +23,18 @@ export default () => {
   const handleRotate = useCallback((direction: number | null) => {
     if (direction === rotateRef.current) direction = null;
     rotateRef.current = direction;
-    setRotate(direction);
+    if (direction === null) {
+      rollRightRef.current!.classList.remove("btn-error");
+      rollLeftRef.current!.classList.remove("btn-error");
+    } else {
+      if (direction > 0) {
+        rollRightRef.current!.classList.add("btn-error");
+        rollLeftRef.current!.classList.remove("btn-error");
+      } else {
+        rollRightRef.current!.classList.remove("btn-error");
+        rollLeftRef.current!.classList.add("btn-error");
+      }
+    }
   }, []);
 
   return model ? (
@@ -48,7 +60,7 @@ export default () => {
         className="flex-1"
         linear
         flat
-        camera={{ position: CAMERA_POSITION as Vector3 }}
+        camera={{ position: CAMERA_POSITION as Vector3, fov: 30 }}
       >
         <primitive object={new AxesHelper(10)} />
         <Suspense fallback={null}>
@@ -57,10 +69,18 @@ export default () => {
         <ThreeOrbitControls />
       </Canvas>
       <div className="flex justify-between">
-        <button className={`btn ${rotate === -1 ? 'btn-error' : ''}`} onClick={() => handleRotate(-1)}>
+        <button
+          ref={rollLeftRef}
+          className="btn"
+          onClick={() => handleRotate(-1)}
+        >
           Roll Left
         </button>
-        <button className={`btn ${rotate === 1 ? 'btn-error' : ''}`} onClick={() => handleRotate(1)}>
+        <button
+          ref={rollRightRef}
+          className="btn"
+          onClick={() => handleRotate(1)}
+        >
           Roll Right
         </button>
       </div>

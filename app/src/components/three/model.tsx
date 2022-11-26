@@ -15,7 +15,7 @@ export default ({ modelId, rotateRef }: IProps) => {
   const { camera } = useThree();
   useFrame(() => {
     if (ref.current === null || rotateRef.current === null) return;
-    ref.current.rotation.z += rotateRef.current > 0 ? 0.01 : -0.01;
+    ref.current.rotation.z += rotateRef.current < 0 ? 0.01 : -0.01;
   });
 
   useEffect(() => {
