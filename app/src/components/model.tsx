@@ -56,6 +56,22 @@ export default () => {
         Model #{model.id}: <strong>{model.name}</strong>
       </h1>
       <h3 className="mb-5">{model.filename}</h3>
+      <div className="flex justify-between">
+        <button
+          ref={rollLeftRef}
+          className="btn btn-xs"
+          onClick={() => handleRotate(-1)}
+        >
+          Roll Left
+        </button>
+        <button
+          ref={rollRightRef}
+          className="btn btn-xs"
+          onClick={() => handleRotate(1)}
+        >
+          Roll Right
+        </button>
+      </div>
       <Canvas
         className="flex-1"
         linear
@@ -68,22 +84,6 @@ export default () => {
         </Suspense>
         <ThreeOrbitControls />
       </Canvas>
-      <div className="flex justify-between">
-        <button
-          ref={rollLeftRef}
-          className="btn"
-          onClick={() => handleRotate(-1)}
-        >
-          Roll Left
-        </button>
-        <button
-          ref={rollRightRef}
-          className="btn"
-          onClick={() => handleRotate(1)}
-        >
-          Roll Right
-        </button>
-      </div>
     </div>
   ) : null;
 };
