@@ -34,6 +34,7 @@ export default ({ modelId, rotateRef }: IProps) => {
       <pointLight position={[50, 20, 0]} />
       <pointLight color={"#ffcc00"} power={5} position={[50, 0, 50]} />
       <pointLight color={"#cccccc"} power={35} position={[-50, 0, 30]} />
+      <pointLight color={"#cccccc"} power={35} position={[0, 0, -50]} />
     </>
   );
 };
