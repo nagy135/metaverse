@@ -32,6 +32,7 @@ export default ({ modelId, rotateRef }: IProps) => {
       <ambientLight intensity={0.3} />
       <pointLight position={[-50, 20, 0]} />
       <pointLight position={[50, 20, 0]} />
+      <pointLight position={[0, 0, 50]} />
     </>
   );
 };
