@@ -1,1 +1,1 @@
-export const API_EP = process.env.REACT_APP_API_EP ?? "http://localhost:13000"
+export const API_EP = process.env.REACT_APP_API_EP ?? "https://metaverse-api.nagy135.eu"
